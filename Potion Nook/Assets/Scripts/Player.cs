@@ -7,36 +7,61 @@ public class Player : MonoBehaviour
     [SerializeField] private GameInput gameInput;
     [SerializeField] private float playerRadius = 0.3f;
     [SerializeField] private float playerHeight = 2f;
+    [SerializeField] private LayerMask countersLayerMask;
 
     private bool canMove = true;
     private float moveDistance;
     private bool isWalking;
+    private Vector3 lastInteractDir;
 
     private void Update() {
+        HandleMovement();
+        HandleInteractions();
+    }
 
+    private void HandleInteractions() {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero) {
+            lastInteractDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Counter is clear
+                clearCounter.Interact();
+
+            }
+        }
+    }
+
+    private void HandleMovement() {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         moveDistance = moveSpeed * Time.deltaTime;
         //collisions
-        canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,  
+        canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                                        playerRadius, moveDir, moveDistance);
 
-        if (!canMove) {
+        if (!canMove)
+        {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
 
-            bool canMoveX = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, 
+            bool canMoveX = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                                                 playerRadius, moveDirX, moveDistance);
-            bool canMoveZ = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, 
+            bool canMoveZ = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                                                 playerRadius, moveDirZ, moveDistance);
 
-            if (canMoveX) 
+            if (canMoveX)
                 moveDir = moveDirX;
             else if (canMoveZ)
                 moveDir = moveDirZ;
-            
-            if(canMoveX || canMoveZ)
+
+            if (canMoveX || canMoveZ)
                 canMove = true;
         }
 
