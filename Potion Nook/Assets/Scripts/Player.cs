@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
@@ -13,6 +12,28 @@ public class Player : MonoBehaviour
     private float moveDistance;
     private bool isWalking;
     private Vector3 lastInteractDir;
+
+    private void Start () {
+        gameInput.OnInteractAction += GemeInput_OnInteractAction;
+    }
+
+    private void GemeInput_OnInteractAction(object sender, System.EventArgs e) {
+        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+
+        if (moveDir != Vector3.zero) {
+            lastInteractDir = moveDir;
+        }
+
+        float interactDistance = 2f;
+        if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
+            if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
+                // Counter is clear
+                clearCounter.Interact();
+
+            }
+        }
+    }
 
     private void Update() {
         HandleMovement();
@@ -31,8 +52,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(transform.position, lastInteractDir, out RaycastHit raycastHit, interactDistance, countersLayerMask)) {
             if (raycastHit.transform.TryGetComponent(out ClearCounter clearCounter)) {
                 // Counter is clear
-                clearCounter.Interact();
-
+                
             }
         }
     }
@@ -42,12 +62,12 @@ public class Player : MonoBehaviour
         Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
         moveDistance = moveSpeed * Time.deltaTime;
+
         //collisions
         canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight,
                                        playerRadius, moveDir, moveDistance);
 
-        if (!canMove)
-        {
+        if (!canMove) {
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
 
@@ -64,7 +84,6 @@ public class Player : MonoBehaviour
             if (canMoveX || canMoveZ)
                 canMove = true;
         }
-
 
         if (canMove)
             transform.position += moveDir * moveDistance;
