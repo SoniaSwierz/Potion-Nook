@@ -1,9 +1,24 @@
 fileFormatVersion: 2
-guid: 41b9bdb7777dbec429dd2bd1293bc8fd
+guid: d1f48a656bdfb7c488471b007fa1f08b
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: counter
+    second: {fileID: 2100000, guid: 747a307f33db0314ab8a9d42b2e64e7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: doors
+    second: {fileID: 2100000, guid: 13ee947e0f4aa6c4993bfac1e4030271, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handles
+    second: {fileID: 2100000, guid: 7cf1df9cb31bd8049a674ec1d94a508f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
