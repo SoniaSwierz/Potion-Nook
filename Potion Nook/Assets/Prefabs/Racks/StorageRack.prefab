@@ -270,8 +270,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9df5b07744a4f1f4aacb7b22c97eb527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StorageRack
+  furniturePoint: {fileID: 2907390005381946095}
   kitchenObjectSO: {fileID: 11400000, guid: ab4d12a69a8ced044836ecd5d519910e, type: 2}
-  rackTakePoint: {fileID: 2907390005381946095}
 --- !u!4 &2893110383331299237 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 789811402272369940, guid: 8ebd370464380fa4f948b76da7234ced, type: 3}

@@ -3,8 +3,8 @@ using UnityEngine;
 public class BaseKicthenFurniture : MonoBehaviour, IKitchenObjectParent {
     
  
-    [SerializeField] private Transform furnitureTakePoint;
-
+    [SerializeField] private Transform furniturePoint;  //tu tez mozna potem zmieniac na tablice do ui regalu
+                                                       
     private KitchenObject kitchenObject;
 
     public virtual void Interact(Player player) {
@@ -12,7 +12,7 @@ public class BaseKicthenFurniture : MonoBehaviour, IKitchenObjectParent {
     }
 
     public Transform GetKitchenObjectFollowTransform() {
-        return furnitureTakePoint;
+        return furniturePoint;
     }
 
     public void SetKitchenObject(KitchenObject kitchenObject) {

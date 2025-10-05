@@ -11,7 +11,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
         public BaseKicthenFurniture selectedKitchenFurniture;
     }
 
-
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private float playerRadius = 0.3f;

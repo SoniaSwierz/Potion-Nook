@@ -223,8 +223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 815f46b40ce955941ae5b40d4de28397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClearCounter
+  furniturePoint: {fileID: 3531537267202163494}
   kitchenObjectSO: {fileID: 11400000, guid: e0f2a76b4e4015246b04842fc83c3921, type: 2}
-  counterTopPoint: {fileID: 3531537267202163494}
 --- !u!4 &3531537267202163494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 759562526215403614, guid: d199fcd386741a748bf7ecca5f9eaceb, type: 3}
