@@ -11,6 +11,10 @@ public class BaseKicthenFurniture : MonoBehaviour, IKitchenObjectParent {
         Debug.LogError("BaseKicthenFurniture.Interact();");
     }
 
+    public virtual void SelectItemFromList(Player player, int keyNumber) {
+        Debug.LogError("BaseKicthenFurniture.SelectItemFromList();");
+    }
+
     public Transform GetKitchenObjectFollowTransform() {
         return furniturePoint;
     }

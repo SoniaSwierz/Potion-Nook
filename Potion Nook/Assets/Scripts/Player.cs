@@ -35,6 +35,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
 
     private void Start () {
         gameInput.OnInteractAction += GemeInput_OnInteractAction;
+        gameInput.OnSelectItemFromListAction += GameInput_OnSelectItemFromListAction;
     }
 
     private void Update() {
@@ -47,6 +48,13 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
             selectedKitchenFurniture.Interact(this);
         }
     }
+
+    private void GameInput_OnSelectItemFromListAction(object sender, GameInput.SelectItemFromList_performedEventArgs e) {
+        if (selectedKitchenFurniture != null) {
+            selectedKitchenFurniture.SelectItemFromList(this, e.keyNumber);
+        }
+    }
+
 
     private void HandleInteractions() {
         Vector2 inputVector = gameInput.GetMovementVectorNormalized();
