@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class CuttingCounter : BaseKicthenFurniture {
 
+    [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
+
     public override void Interact(Player player) {
         if (!HasKitchenObject()) {
             //no kitchen object
@@ -20,5 +22,25 @@ public class CuttingCounter : BaseKicthenFurniture {
                 GetKitchenObject().SetKitchenObjectParent(player);
             }
         }
+    }
+
+    public override void InteractAlternate(Player player) {
+        if(HasKitchenObject()) {
+            //there is a KicthenObject here
+            KitchenObjectSO outputGetKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
+
+            GetKitchenObject().DestroySelf();
+
+            KitchenObject.SpawnKitchenObject(outputGetKitchenObjectSO, this);
+        }
+    }
+
+    private KitchenObjectSO GetOutputForInput(KitchenObjectSO inputKitchenObjectSo) {
+        foreach (CuttingRecipeSO cuttingRecipeSO in cuttingRecipeSOArray) {
+            if(cuttingRecipeSO.input == inputKitchenObjectSo) {
+                return cuttingRecipeSO.output;
+            }
+        }
+        return null;
     }
 }

@@ -30,8 +30,7 @@ public class StorageRack: BaseKicthenFurniture {
         if (!player.HasKitchenObject()) {
             //player is not carrying anything
             if (keyNumber <= kitchenObjectSO.Length) {
-                Transform kitchenObjectTransform = Instantiate(kitchenObjectSO[keyNumber - 1].prefab);
-                kitchenObjectTransform.GetComponent<KitchenObject>().SetKitchenObjectParent(player);
+                KitchenObject.SpawnKitchenObject(kitchenObjectSO[keyNumber - 1], player);
             }
         }
     }

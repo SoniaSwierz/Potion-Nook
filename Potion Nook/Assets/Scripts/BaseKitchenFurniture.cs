@@ -3,7 +3,7 @@ using UnityEngine;
 public class BaseKicthenFurniture : MonoBehaviour, IKitchenObjectParent {
     
  
-    [SerializeField] private Transform furniturePoint;  //tu tez mozna potem zmieniac na tablice do ui regalu
+    [SerializeField] private Transform furniturePoint;  
                                                        
     private KitchenObject kitchenObject;
 
@@ -11,8 +11,12 @@ public class BaseKicthenFurniture : MonoBehaviour, IKitchenObjectParent {
         Debug.LogError("BaseKicthenFurniture.Interact();");
     }
 
+    public virtual void InteractAlternate(Player player) {
+        Debug.LogError("BaseKicthenFurniture.InteractAlternate();");
+    }
+
     public virtual void SelectItemFromList(Player player, int keyNumber) {
-        Debug.LogError("BaseKicthenFurniture.SelectItemFromList();");
+        Debug.Log("BaseKicthenFurniture.SelectItemFromList();");
     }
 
     public Transform GetKitchenObjectFollowTransform() {

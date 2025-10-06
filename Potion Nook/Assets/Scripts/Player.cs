@@ -36,11 +36,18 @@ public class Player : MonoBehaviour, IKitchenObjectParent {
     private void Start () {
         gameInput.OnInteractAction += GemeInput_OnInteractAction;
         gameInput.OnSelectItemFromListAction += GameInput_OnSelectItemFromListAction;
+        gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
     private void Update() {
         HandleMovement();
         HandleInteractions();
+    }
+
+    private void GameInput_OnInteractAlternateAction(object sender, System.EventArgs e) {
+        if (selectedKitchenFurniture != null) {
+            selectedKitchenFurniture.InteractAlternate(this);
+        }
     }
 
     private void GemeInput_OnInteractAction(object sender, System.EventArgs e) {
