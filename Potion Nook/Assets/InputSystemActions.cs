@@ -285,6 +285,17 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""action"": ""SelectItemFromList"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a34f5020-3c0c-45f7-aa34-ff8ed4db2c98"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectItemFromList"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
