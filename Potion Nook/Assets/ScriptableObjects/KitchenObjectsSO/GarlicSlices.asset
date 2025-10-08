@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GarlicSlices
   m_EditorClassIdentifier: Assembly-CSharp::KitchenObjectSO
   prefab: {fileID: 4329657865633390289, guid: 50198f85fb3593f489ad04f8c87bab80, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 8a15f36a0ad4daa4f890328765b3e55d, type: 3}
   objectName: Garlic Slices
