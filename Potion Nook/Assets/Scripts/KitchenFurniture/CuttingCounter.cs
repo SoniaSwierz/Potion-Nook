@@ -8,11 +8,14 @@ public class CuttingCounter : BaseKicthenFurniture {
     public class OnProgressChangedEventArgs : EventArgs {
         public float progressNormalized;
     }
+    public event EventHandler OnCut;
+    public event EventHandler OnKnifeUp;
+    public event EventHandler OnKnifeDown;
 
     [SerializeField] private CuttingRecipeSO[] cuttingRecipeSOArray;
 
     private int cuttingProgress;
-
+   
     public override void Interact(Player player) {
         if (!HasKitchenObject()) {
             //no kitchen object
@@ -46,16 +49,19 @@ public class CuttingCounter : BaseKicthenFurniture {
         if(HasKitchenObject() && HasRecipeWithInput(GetKitchenObject().GetKitchenObjectSO())) {
             //there is a KicthenObject here && it can be cut
 
+            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
+
+            HandleKnife(cuttingRecipeSO);
+
             cuttingProgress++;
 
-            CuttingRecipeSO cuttingRecipeSO = GetCuttingRecipeSOWithInput(GetKitchenObject().GetKitchenObjectSO());
             OnProgressChanged?.Invoke(this, new OnProgressChangedEventArgs {
                 progressNormalized = (float)cuttingProgress / cuttingRecipeSO.cuttingProgressMax
             });
 
             if (cuttingProgress >= cuttingRecipeSO.cuttingProgressMax) {
                 KitchenObjectSO outputGetKitchenObjectSO = GetOutputForInput(GetKitchenObject().GetKitchenObjectSO());
-
+                
                 GetKitchenObject().DestroySelf();
                 KitchenObject.SpawnKitchenObject(outputGetKitchenObjectSO, this);
             }
@@ -84,4 +90,19 @@ public class CuttingCounter : BaseKicthenFurniture {
         }
         return null;
     }
+
+    private void HandleKnife(CuttingRecipeSO cuttingRecipeSO) {
+        
+        if (cuttingProgress == 0)
+            OnKnifeUp?.Invoke(this, EventArgs.Empty);
+        else if (cuttingProgress == cuttingRecipeSO.cuttingProgressMax - 1)
+            OnKnifeDown?.Invoke(this, EventArgs.Empty);
+        else if (cuttingProgress < cuttingRecipeSO.cuttingProgressMax)
+            OnCut?.Invoke(this, EventArgs.Empty);
+        else {
+            OnKnifeUp?.Invoke(this, EventArgs.Empty);
+            OnKnifeDown?.Invoke(this, EventArgs.Empty);
+        }
+    }
+
 }
