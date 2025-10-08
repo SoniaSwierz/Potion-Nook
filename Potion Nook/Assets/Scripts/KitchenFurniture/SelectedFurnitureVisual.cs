@@ -3,14 +3,16 @@ using UnityEngine;
 public class SelectedFurnitureVisual : MonoBehaviour {
 
 
-    [SerializeField] private BaseKicthenFurniture kitchenFurniture;
-    [SerializeField] private GameObject[] visualGameObjectArray;
+    [SerializeField] protected BaseKicthenFurniture kitchenFurniture;
+    [SerializeField] protected GameObject[] visualGameObjectArray;
+
 
     private void Start() {
         Player.Instance.OnSelectedFurnitureChanged += Player_OnSelectedFurnitureChanged;
     }
 
-    private void Player_OnSelectedFurnitureChanged(object sender, Player.OnSelectedFurnitureChangedEventArgs e) {
+
+    protected virtual void Player_OnSelectedFurnitureChanged(object sender, Player.OnSelectedFurnitureChangedEventArgs e) {
         if (e.selectedKitchenFurniture == kitchenFurniture) {
             Show();
         } else {
@@ -18,13 +20,13 @@ public class SelectedFurnitureVisual : MonoBehaviour {
         }
     }
 
-    private void Show() {
+    protected void Show() {
         foreach (GameObject visualGameObject in visualGameObjectArray) {
             visualGameObject.SetActive(true);
         }
     }
 
-    private void Hide() {
+    protected void Hide() {
         foreach (GameObject visualGameObject in visualGameObjectArray) {
             visualGameObject.SetActive(false);
         }
