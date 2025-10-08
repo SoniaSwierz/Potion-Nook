@@ -4,7 +4,7 @@ public class SelectedFurnitureVisual : MonoBehaviour {
 
 
     [SerializeField] protected BaseKicthenFurniture kitchenFurniture;
-    [SerializeField] private GameObject[] visualGameObjectArray;
+    [SerializeField] protected GameObject[] visualGameObjectArray;
 
 
     private void Start() {

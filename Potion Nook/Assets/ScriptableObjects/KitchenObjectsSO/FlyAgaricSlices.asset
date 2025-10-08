@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: FlyAgaricSlices
   m_EditorClassIdentifier: Assembly-CSharp::KitchenObjectSO
   prefab: {fileID: 4329657865633390289, guid: e8fbef7e97b1f0f4a92850066ade9e8a, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: af5bffcfeeef5e449a0e358a3c95eb3c, type: 3}
   objectName: Fly Agaric Slices
